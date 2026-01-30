@@ -7,11 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum ServeStyle {
-  BLACK
-  WITH_MILK
-}
-
 model CoffeeEntry {
   id             String      @id @default(cuid())
   date           DateTime
@@ -26,7 +21,7 @@ model CoffeeEntry {
   cupProfileRaw  String?
   grindSetting   Float?
   brewMethod     String?
-  serve          ServeStyle?
+  serve          String?
   rating         Float
   notes          String?
   nicholasNotes  String?

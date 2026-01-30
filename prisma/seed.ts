@@ -1,4 +1,4 @@
-import { PrismaClient, ServeStyle } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -32,7 +32,7 @@ const seedData = [
     cupProfileRaw: 'Citrus, Cacao, Almond',
     rating: 4.5,
     brewMethod: 'V60',
-    serve: ServeStyle.BLACK
+    serve: 'BLACK'
   },
   {
     date: '2024-05-16',
@@ -43,7 +43,7 @@ const seedData = [
     cupProfileRaw: 'Cherry, Honey, Orange',
     rating: 4.2,
     brewMethod: 'Kalita',
-    serve: ServeStyle.BLACK
+    serve: 'BLACK'
   },
   {
     date: '2024-05-21',
@@ -54,7 +54,7 @@ const seedData = [
     cupProfileRaw: 'Blueberry, Floral and Lemon',
     rating: 4.8,
     brewMethod: 'Chemex',
-    serve: ServeStyle.BLACK
+    serve: 'BLACK'
   },
   {
     date: '2024-05-28',
@@ -65,7 +65,7 @@ const seedData = [
     cupProfileRaw: 'Blackcurrant, Tomato, Brown sugar',
     rating: 4.0,
     brewMethod: 'Espresso',
-    serve: ServeStyle.WITH_MILK
+    serve: 'WITH_MILK'
   },
   {
     date: '2024-06-02',
@@ -76,7 +76,7 @@ const seedData = [
     cupProfileRaw: 'Papaya, Peach and Violet',
     rating: 4.7,
     brewMethod: 'Aeropress',
-    serve: ServeStyle.BLACK
+    serve: 'BLACK'
   },
   {
     date: '2024-06-08',
@@ -87,7 +87,7 @@ const seedData = [
     cupProfileRaw: 'Lime, Honey, Tea',
     rating: 3.9,
     brewMethod: 'French Press',
-    serve: ServeStyle.WITH_MILK
+    serve: 'WITH_MILK'
   },
   {
     date: '2024-06-14',
@@ -98,7 +98,7 @@ const seedData = [
     cupProfileRaw: 'Chocolate, Nougat, Plum',
     rating: 4.1,
     brewMethod: 'Moka Pot',
-    serve: ServeStyle.BLACK
+    serve: 'BLACK'
   },
   {
     date: '2024-06-20',
@@ -109,7 +109,7 @@ const seedData = [
     cupProfileRaw: 'Earthy, Dark chocolate, Spice',
     rating: 3.7,
     brewMethod: 'Cold Brew',
-    serve: ServeStyle.BLACK
+    serve: 'BLACK'
   }
 ];
 

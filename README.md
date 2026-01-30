@@ -47,6 +47,12 @@ npx prisma db seed
 npm run dev
 ```
 
+## Run in Codespaces
+
+```bash
+npm install && npm run db:reset && npm run dev
+```
+
 ## CSV import format
 
 Required columns: `date`, `company`, `name`, `country`, `process`, `rating`.

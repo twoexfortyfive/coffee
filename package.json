@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "db:reset": "rm -f prisma/dev.db prisma/dev.db-journal && rm -rf prisma/migrations && prisma generate && prisma migrate dev --name init",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

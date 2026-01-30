@@ -20,7 +20,7 @@ export const coffeeFormSchema = z.object({
     .transform((value) => (value === '' || value === null ? null : value)),
   brewMethod: z.string().optional().nullable(),
   serve: z
-    .union([z.enum(['BLACK', 'WITH_MILK']), z.literal('')])
+    .union([z.literal('BLACK'), z.literal('WITH_MILK'), z.literal('')])
     .optional()
     .nullable()
     .transform((value) => (value === '' ? null : value)),
