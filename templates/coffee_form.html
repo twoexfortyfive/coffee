@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>{{ coffee and 'Edit coffee' or 'Add coffee' }}</h1>
+    <p class="muted">Capture a brew and tasting notes.</p>
+  </div>
+</section>
+
+<form class="card form" method="post">
+  <div class="grid">
+    <label>
+      Date *
+      <input type="date" name="date" value="{{ values.date or '' }}" />
+      {% if errors.date %}<span class="error">{{ errors.date }}</span>{% endif %}
+    </label>
+    <label>
+      Company / Roaster *
+      <input type="text" name="company" value="{{ values.company or '' }}" />
+      {% if errors.company %}<span class="error">{{ errors.company }}</span>{% endif %}
+    </label>
+    <label>
+      Name *
+      <input type="text" name="name" value="{{ values.name or '' }}" />
+      {% if errors.name %}<span class="error">{{ errors.name }}</span>{% endif %}
+    </label>
+    <label>
+      Coffee region
+      <input type="text" name="coffee_region" value="{{ values.coffee_region or '' }}" />
+    </label>
+    <label>
+      Country *
+      <input type="text" name="country" value="{{ values.country or '' }}" />
+      {% if errors.country %}<span class="error">{{ errors.country }}</span>{% endif %}
+    </label>
+    <label>
+      Location
+      <input type="text" name="location" value="{{ values.location or '' }}" />
+    </label>
+    <label>
+      Altitude
+      <input type="text" name="altitude" value="{{ values.altitude or '' }}" />
+    </label>
+    <label>
+      Process *
+      <input type="text" name="process" value="{{ values.process or '' }}" />
+      {% if errors.process %}<span class="error">{{ errors.process }}</span>{% endif %}
+    </label>
+    <label>
+      Varietal
+      <input type="text" name="varietal" value="{{ values.varietal or '' }}" />
+    </label>
+    <label>
+      Cup profile
+      <input type="text" name="cup_profile" value="{{ values.cup_profile or '' }}" />
+    </label>
+    <label>
+      Grind setting
+      <input type="number" name="grind_setting" value="{{ values.grind_setting or '' }}" />
+      {% if errors.grind_setting %}<span class="error">{{ errors.grind_setting }}</span>{% endif %}
+    </label>
+    <label>
+      Brew method
+      <input type="text" name="brew_method" value="{{ values.brew_method or '' }}" />
+    </label>
+    <label>
+      Serve
+      <select name="serve">
+        <option value="" {% if not values.serve %}selected{% endif %}>Select</option>
+        <option value="BLACK" {% if values.serve == 'BLACK' %}selected{% endif %}>Black</option>
+        <option value="WITH_MILK" {% if values.serve == 'WITH_MILK' %}selected{% endif %}>With milk</option>
+      </select>
+      {% if errors.serve %}<span class="error">{{ errors.serve }}</span>{% endif %}
+    </label>
+    <label>
+      Rating *
+      <input type="number" name="rating" step="0.5" min="1" max="5" value="{{ values.rating or '' }}" />
+      {% if errors.rating %}<span class="error">{{ errors.rating }}</span>{% endif %}
+    </label>
+  </div>
+
+  <label>
+    Notes
+    <textarea name="notes" rows="3">{{ values.notes or '' }}</textarea>
+  </label>
+  <label>
+    Nicholas notes
+    <textarea name="nicholas_notes" rows="3">{{ values.nicholas_notes or '' }}</textarea>
+  </label>
+
+  <button class="button primary" type="submit">{{ coffee and 'Update coffee' or 'Save coffee' }}</button>
+</form>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>Coffees</h1>
+    <p class="muted">Search, filter, and review your brews.</p>
+  </div>
+  <div class="actions">
+    <a class="button primary" href="{{ url_for('coffee_new') }}">Add coffee</a>
+    <a class="button" href="{{ url_for('import_csv') }}">Import CSV</a>
+    <a class="button" href="{{ url_for('insights') }}">Insights</a>
+  </div>
+</section>
+
+<form class="card filters" method="get">
+  <label>
+    Search
+    <input type="text" name="search" value="{{ filters.search }}" placeholder="Company, name, notes..." />
+  </label>
+  <label>
+    Country
+    <select name="country">
+      <option value="">All</option>
+      {% for option in countries %}
+        <option value="{{ option }}" {% if option == filters.country %}selected{% endif %}>{{ option }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    Process
+    <select name="process">
+      <option value="">All</option>
+      {% for option in processes %}
+        <option value="{{ option }}" {% if option == filters.process %}selected{% endif %}>{{ option }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    Brew method
+    <select name="brew_method">
+      <option value="">All</option>
+      {% for option in brew_methods %}
+        <option value="{{ option }}" {% if option == filters.brew_method %}selected{% endif %}>{{ option }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    Serve
+    <select name="serve">
+      <option value="">All</option>
+      <option value="BLACK" {% if filters.serve == 'BLACK' %}selected{% endif %}>Black</option>
+      <option value="WITH_MILK" {% if filters.serve == 'WITH_MILK' %}selected{% endif %}>With milk</option>
+    </select>
+  </label>
+  <label>
+    Min rating
+    <select name="rating_min">
+      <option value="">Any</option>
+      {% for value in [1,2,3,4,5] %}
+        <option value="{{ value }}" {% if filters.rating_min == value|string %}selected{% endif %}>{{ value }}+</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    Sort
+    <select name="sort">
+      <option value="date_desc" {% if filters.sort == 'date_desc' %}selected{% endif %}>Date (newest)</option>
+      <option value="rating_desc" {% if filters.sort == 'rating_desc' %}selected{% endif %}>Rating (high to low)</option>
+    </select>
+  </label>
+  <div class="filters-actions">
+    <button class="button" type="submit">Apply filters</button>
+  </div>
+</form>
+
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Company</th>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Process</th>
+        <th>Rating</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if coffees %}
+        {% for coffee in coffees %}
+          <tr>
+            <td>{{ coffee.date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ coffee.company }}</td>
+            <td>{{ coffee.name }}</td>
+            <td>{{ coffee.country }}</td>
+            <td>{{ coffee.process }}</td>
+            <td>{{ '%.1f'|format(coffee.rating) }}</td>
+            <td><a href="{{ url_for('coffee_detail', coffee_id=coffee.id) }}">View</a></td>
+          </tr>
+        {% endfor %}
+      {% else %}
+        <tr>
+          <td colspan="7" class="empty">No coffees yet. Add your first brew.</td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
