@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>Insights</h1>
+    <p class="muted">Quick summaries of what you like.</p>
+  </div>
+</section>
+
+<div class="grid-two">
+  <div class="card">
+    <h2>Top processes</h2>
+    <ul>
+      {% if top_processes %}
+        {% for name, avg in top_processes %}
+          <li class="list-row"><span>{{ name }}</span><span>{{ '%.2f'|format(avg) }}</span></li>
+        {% endfor %}
+      {% else %}
+        <li>No data yet.</li>
+      {% endif %}
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Top countries</h2>
+    <ul>
+      {% if top_countries %}
+        {% for name, avg in top_countries %}
+          <li class="list-row"><span>{{ name }}</span><span>{{ '%.2f'|format(avg) }}</span></li>
+        {% endfor %}
+      {% else %}
+        <li>No data yet.</li>
+      {% endif %}
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Top tags</h2>
+    <ul>
+      {% if top_tags %}
+        {% for name, count in top_tags %}
+          <li class="list-row"><span>{{ name }}</span><span>{{ count }}</span></li>
+        {% endfor %}
+      {% else %}
+        <li>No data yet.</li>
+      {% endif %}
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Highest rated coffees</h2>
+    <ul>
+      {% if highest_rated %}
+        {% for coffee in highest_rated %}
+          <li class="list-row"><span>{{ coffee.company }} — {{ coffee.name }}</span><span>{{ '%.1f'|format(coffee.rating) }}</span></li>
+        {% endfor %}
+      {% else %}
+        <li>No data yet.</li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

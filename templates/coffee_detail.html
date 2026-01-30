@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>{{ coffee.name }}</h1>
+    <p class="muted">{{ coffee.company }}</p>
+  </div>
+  <div class="actions">
+    <a class="button" href="{{ url_for('coffee_edit', coffee_id=coffee.id) }}">Edit</a>
+    <form method="post" action="{{ url_for('coffee_delete', coffee_id=coffee.id) }}">
+      <button class="button danger" type="submit">Delete</button>
+    </form>
+  </div>
+</section>
+
+<div class="card detail-grid">
+  <div>
+    <p class="label">Date</p>
+    <p>{{ coffee.date.strftime('%Y-%m-%d') }}</p>
+  </div>
+  <div>
+    <p class="label">Country</p>
+    <p>{{ coffee.country }}</p>
+  </div>
+  <div>
+    <p class="label">Process</p>
+    <p>{{ coffee.process }}</p>
+  </div>
+  <div>
+    <p class="label">Rating</p>
+    <p>{{ '%.1f'|format(coffee.rating) }}</p>
+  </div>
+  <div>
+    <p class="label">Brew method</p>
+    <p>{{ coffee.brew_method or '—' }}</p>
+  </div>
+  <div>
+    <p class="label">Serve</p>
+    <p>
+      {% if coffee.serve == 'WITH_MILK' %}
+        With milk
+      {% elif coffee.serve == 'BLACK' %}
+        Black
+      {% else %}
+        —
+      {% endif %}
+    </p>
+  </div>
+  <div class="span-2">
+    <p class="label">Cup profile</p>
+    <p>{{ coffee.cup_profile_raw or '—' }}</p>
+  </div>
+  <div class="span-2">
+    <p class="label">Tags</p>
+    <p>
+      {% if coffee.tags %}
+        {{ coffee.tags | map(attribute='name') | join(', ') }}
+      {% else %}
+        —
+      {% endif %}
+    </p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Notes</h2>
+  <p>{{ coffee.notes or '—' }}</p>
+  <h2>Nicholas notes</h2>
+  <p>{{ coffee.nicholas_notes or '—' }}</p>
+</div>
+{% endblock %}

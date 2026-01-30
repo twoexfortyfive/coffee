@@ -1,59 +1,41 @@
-# Coffee Diary MVP
+# Coffee Diary MVP (Flask)
 
-A simple coffee diary built with Next.js App Router, Prisma, SQLite, Zod, and React Hook Form.
+A beginner-friendly coffee diary built with Flask, SQLite, and SQLAlchemy.
 
-## Folder structure
+## Project structure
 
 ```
-app/
-  coffees/
-    [id]/
-    new/
-  import/
-  insights/
-  lib/
-components/
-prisma/
-styles/
-```
-
-## Install
-
-```bash
-npm install
-```
-
-Create a local `.env` file (or copy `.env.example`) with the SQLite connection:
-
-```bash
-cp .env.example .env
-```
-
-## Prisma migrate
-
-```bash
-npx prisma migrate dev --name init
-```
-
-## Prisma seed
-
-```bash
-npx prisma db seed
-```
-
-## Run dev server
-
-```bash
-npm run dev
+app.py
+models.py
+templates/
+  base.html
+  coffees.html
+  coffee_form.html
+  coffee_detail.html
+  import.html
+  insights.html
+static/
+  styles.css
+requirements.txt
 ```
 
 ## Run in Codespaces
 
 ```bash
-npm install && npm run db:reset && npm run dev
+pip install -r requirements.txt && python app.py
 ```
 
-## CSV import format
+The app runs on http://localhost:3000 and creates `coffee.db` automatically on first run.
 
-Required columns: `date`, `company`, `name`, `country`, `process`, `rating`.
-Other optional columns match the form field names.
+## Seed sample data
+
+```bash
+python app.py --seed
+```
+
+## Notes
+
+- Required CSV columns: `date`, `company`, `name`, `country`, `process`, `rating`.
+- Optional columns: `coffee_region`, `location`, `altitude`, `varietal`, `cup_profile`,
+  `grind_setting`, `brew_method`, `serve`, `notes`, `nicholas_notes`.
+- Serve values must be `BLACK` or `WITH_MILK`.

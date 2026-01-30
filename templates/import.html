@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>Import CSV</h1>
+    <p class="muted">Upload a CSV with required columns: date, company, name, country, process, rating.</p>
+  </div>
+</section>
+
+<form class="card" method="post" enctype="multipart/form-data">
+  <label>
+    CSV file
+    <input type="file" name="csv_file" accept=".csv" />
+  </label>
+  <button class="button" type="submit">Preview CSV</button>
+</form>
+
+{% if errors %}
+  <div class="card error-box">
+    <h2>Fix these issues before importing</h2>
+    <ul>
+      {% for error in errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+{% if preview_rows %}
+  <div class="card">
+    <h2>Preview (first 20 rows)</h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Company</th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Process</th>
+            <th>Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in preview_rows %}
+            <tr>
+              <td>{{ row.date }}</td>
+              <td>{{ row.company }}</td>
+              <td>{{ row.name }}</td>
+              <td>{{ row.country }}</td>
+              <td>{{ row.process }}</td>
+              <td>{{ row.rating }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endif %}
+
+{% if preview_rows and not errors %}
+  <form class="card" method="post">
+    <input type="hidden" name="rows_json" value='{{ rows_json }}' />
+    <input type="hidden" name="confirm" value="1" />
+    <button class="button primary" type="submit">Import rows</button>
+  </form>
+{% endif %}
+{% endblock %}
